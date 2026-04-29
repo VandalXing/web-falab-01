@@ -2,53 +2,53 @@ import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 const lessons = [
   {
-    num: '一',
-    title: '没有漏电的样品，也可能抓到热点',
-    desc: '不要仅凭I-V曲线判断。一个ESD HBM Fail案例中，Fail/Pass样品的I-V曲线完全一样，但OBIRCH仍能抓到热点。所以，不妨试一试热点分析，可能会有意外发现。',
+    num: '01',
+    title: 'Samples without leakage can still show hotspots',
+    desc: 'Do not rely solely on I-V curves for judgment. In an ESD HBM fail case, the I-V curves of fail and pass devices were identical, yet OBIRCH/EMMI still detected a hotspot. Always try fault isolation techniques — they may reveal unexpected findings.',
   },
   {
-    num: '二',
-    title: '有热点的地方，不一定有问题',
-    desc: 'MIM区域的Metal residue引起异常串联/并联，导致其他地方负载过大而形成热点。此时热点出现在负载过大的位置，而非制程真正有问题的地方。需要结合Layout判断热点的合理性。',
+    num: '02',
+    title: 'A hotspot location is not necessarily the defect location',
+    desc: 'In MIM capacitor cases, metal residue causes abnormal series/parallel connections, creating excessive load at other locations which then become hotspots. The hotspot appears where the load is highest, not where the actual process defect is. Always correlate with layout to validate hotspot合理性.',
   },
   {
-    num: '三',
-    title: '有漏电的样品，也可能是Via open/Metal断线',
-    desc: 'Via open会改变线路连接方式，导致电路重构并形成新的漏电通路。因此，漏电故障不一定就是短路问题，必须通过逐层VC比对和Layout追踪确认真正的失效类型。',
+    num: '03',
+    title: 'Leaky samples may also have via open or metal breakage',
+    desc: 'A via open can reconfigure the circuit pathway, creating new leakage paths. Therefore, leakage failure is not necessarily a short — layer-by-layer VC comparison and layout tracing are required to confirm the true failure type.',
   },
   {
-    num: '四',
-    title: 'Via层较高的样品，需多角度VC检查',
-    desc: '不仅要Low KV看Via/Metal顶部VC，High KV看Via底部的Metal，还要从顶部用High KV看IMD。厚的Via IMD材质中间可能有particle或delamination等缺陷，仅看单层容易被忽略。',
+    num: '04',
+    title: 'For high via stacks, inspect at multiple angles and voltages',
+    desc: 'Use low kV for via/metal top VC, high kV for bottom metal, and also high kV from top to inspect the IMD. Thick via IMD can harbor particles or delamination in the middle that are easily missed when viewing only a single layer.',
   },
   {
-    num: '五',
-    title: 'Metal暗掉时，必须看Layout确认往下连接',
-    desc: 'Metal暗掉不一定是该层Metal本身的问题。必须查看Layout确认往下是怎么接的，确定是open的Via/CT位置再切cross section。直接切VC异常Metal底下的Via，可能切不到东西。',
+    num: '05',
+    title: 'When metal appears dark, check layout before cutting',
+    desc: 'Dark metal does not necessarily mean the metal layer itself is defective. Always check the layout to see how it connects downward, identify the open via/CT location, then cut the cross-section. Cutting directly below the VC-abnormal metal may miss the actual defect.',
   },
   {
-    num: '六',
-    title: 'Inline PID case与ESD fail的鉴别',
-    desc: 'Plasma Induced Damage（PID）造成的失效形貌有时与ESD test fail非常相似，容易混淆。需要通过测试条件、失效分布（inline vs 测试后）和深度分析来区分，这是有lesson learning的。',
+    num: '06',
+    title: 'Inline PID cases can resemble ESD fails',
+    desc: 'Plasma Induced Damage (PID) can produce failure morphologies very similar to ESD test failures, causing confusion. Distinguish by testing conditions, failure distribution (inline vs. post-test), and detailed analysis — this is a well-documented lesson.',
   },
 ];
 
 const specialTechniques = [
   {
-    title: 'FIB/I-beam辅助Memory Scramble建立',
-    desc: '当需要精确定位计算各边dummy个数时，用FIB/I-beam制造缺陷后测试验证。在一个bit上标记→存图→测试完成后无需做FA即可达到定位目的。',
+    title: 'FIB/I-beam Assisted Memory Scramble Establishment',
+    desc: 'When precise dummy bit counting is needed, use FIB/I-beam to manufacture a defect at a known bit, store the image, perform testing, and validate without requiring additional FA. This enables rapid memory address-to-physical location mapping.',
   },
   {
-    title: 'FIB挖坑法熟悉新产品结构',
-    desc: '在目标点四周挖坑，暴露不同层次的地址和结构，对于从不同层数地址的产品尤为有帮助。可快速理解新产品Metal/Via层叠结构。',
+    title: 'FIB Trenching for New Product Structure Learning',
+    desc: 'Dig trenches around the target point to expose structures at different layers. This is especially helpful for products with varying layer counts per address. Quickly understand the new product metal/via layer stack structure.',
   },
   {
-    title: '挖孔/镀金支撑提高研磨平整性',
-    desc: '在目标点四周挖坑填入较硬金属（如Pt），对目标点形成支撑，减少边缘效应或图案效应的影响，同时降低研磨速率、提高可控性。',
+    title: 'Trenching / Pt Deposition for Improved Polishing Planarity',
+    desc: 'Dig trenches around the target and fill with harder metal (Pt) to create support structures. This reduces edge effects and pattern effects while lowering polishing rate and improving controllability.',
   },
   {
-    title: 'Test board辅助动态电性分析',
-    desc: '利用测试板对样品进行动态偏置下的电性分析，可配合EMMI/OBIRCH捕捉只在动态工作状态下才出现的失效点。',
+    title: 'Test Board Assisted Dynamic Electrical Analysis',
+    desc: 'Use a test board to apply dynamic bias during EMMI/OBIRCH analysis, capturing failure points that only appear during dynamic operating conditions and not under static bias.',
   },
 ];
 
@@ -61,16 +61,11 @@ export default function LessonLearning() {
     <section id="lessons" className="relative py-24 md:py-32 bg-[#0d121f]" style={{ paddingLeft: 'clamp(1.5rem, 5vw, 4rem)', paddingRight: 'clamp(1.5rem, 5vw, 4rem)' }}>
       <div className="max-w-[1200px] mx-auto">
         <div ref={headerReveal.ref} className={`mb-16 transition-all duration-700 ${headerReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-          <p className="text-[#00d4ff] text-xs font-medium uppercase tracking-[0.1em] mb-3">Lessons & Techniques</p>
-          <h2 className="text-[#f1f5f9] font-semibold leading-tight mb-4" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)' }}>
-            失效分析经验总结
-          </h2>
-          <p className="text-[#94a3b8] text-base max-w-2xl leading-relaxed">
-            基于大量实际案例总结的六条核心经验教训，以及四项特殊的FA分析手法。这些经验可以帮助分析师避免常见陷阱、提高分析效率。
-          </p>
+          <p className="text-[#00d4ff] text-xs font-medium uppercase tracking-[0.1em] mb-3">Best Practices & Techniques</p>
+          <h2 className="text-[#f1f5f9] font-semibold leading-tight mb-4" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)' }}>Best Practices</h2>
+          <p className="text-[#94a3b8] text-base max-w-2xl leading-relaxed">Six core lessons learned from extensive real-case experience, plus four specialized FA techniques to improve analysis efficiency and avoid common pitfalls.</p>
         </div>
 
-        {/* Six Lessons */}
         <div ref={lessonsReveal.ref} className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-16 transition-all duration-700 delay-100 ${lessonsReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
           {lessons.map((l) => (
             <div key={l.num} className="bg-[#111827] border border-[rgba(148,163,184,0.1)] rounded-xl p-6 hover:border-[rgba(0,212,255,0.2)] transition-all duration-300">
@@ -85,9 +80,8 @@ export default function LessonLearning() {
           ))}
         </div>
 
-        {/* Special Techniques */}
         <div ref={techReveal.ref} className={`transition-all duration-700 delay-200 ${techReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-          <h3 className="text-[#f1f5f9] font-semibold text-lg mb-6">特殊FA分析手法</h3>
+          <h3 className="text-[#f1f5f9] font-semibold text-lg mb-6">Specialized FA Techniques</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {specialTechniques.map((t) => (
               <div key={t.title} className="bg-[#111827] border border-[rgba(148,163,184,0.1)] rounded-xl p-6">
