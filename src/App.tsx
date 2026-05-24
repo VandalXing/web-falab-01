@@ -1,10 +1,10 @@
 import Navigation from './sections/Navigation';
 import Hero from './sections/Hero';
-import FABasics from './sections/FABasics';
-import CoreTools from './sections/CoreTools';
-import CaseStudies from './sections/CaseStudies';
-import LessonLearning from './sections/LessonLearning';
+import LabManagement from './sections/LabManagement';
+import Equipment from './sections/Equipment';
+import FunctionsCases from './sections/FunctionsCases';
 import SRAMReference from './sections/SRAMReference';
+import Contact from './sections/Contact';
 import Footer from './sections/Footer';
 
 export default function App() {
@@ -13,11 +13,11 @@ export default function App() {
       <Navigation />
       <main>
         <Hero />
-        <FABasics />
-        <CoreTools />
-        <CaseStudies />
-        <LessonLearning />
+        <LabManagement />
+        <Equipment />
+        <FunctionsCases />
         <SRAMReference />
+        <Contact />
       </main>
       <Footer />
     </div>
