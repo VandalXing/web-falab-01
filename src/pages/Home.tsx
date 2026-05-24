@@ -1,20 +1,17 @@
-import { useState } from 'react'
-import '../App.css'
+import Hero from '@/sections/Hero';
+import FABasics from '@/sections/FABasics';
+import CaseStudies from '@/sections/CaseStudies';
+import LessonLearning from '@/sections/LessonLearning';
+import SRAMReference from '@/sections/SRAMReference';
 
 export default function Home() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
+      <Hero />
+      <FABasics />
+      <CaseStudies />
+      <LessonLearning />
+      <SRAMReference />
     </>
-  )
+  );
 }
